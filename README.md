@@ -54,6 +54,18 @@
              │       │     ├── nova_gazebo.xacro
              │       │     ├── nova.gazebo             
              │       │     └── nova.urdf.xacro
+             │       ├── image/
+             │       │     ├── AMCL.png
+             │       │     ├── DWA.png
+             │       │     ├── DWA2.png
+             │       │     ├── frames.png 
+             │       │     ├── global_costmap.png
+             │       │     ├── local_costmap.png   
+             │       │     ├── map.png
+             │       │     ├── path.png  
+             │       │     ├── robot_gazebo.png
+             │       │     ├── robot_rviz.png              
+             │       │     └── rviz_gazebo.png
              │       ├── CMakeLists.txt
              │       └── package.xml  
              ├── CMakeLists.txt
@@ -84,12 +96,20 @@ and [teleop_twist_keyboard](http://wiki.ros.org/teleop_twist_keyboard).
 2. CMake & g++/gcc, C++11
 3. Install some dependencies
 
+```bash
+sudo apt-get update && sudo apt-get upgrade -y
 ```
-$ sudo apt-get update && sudo apt-get upgrade -y
-$ sudo apt-get install ros-noetic-map-server
-$ sudo apt-get install ros-noetic-amcl
-$ sudo apt-get install ros-noetic-move-base
-$ sudo apt-get install ros-noetic-slam-gmapping
+```bash
+sudo apt-get install ros-noetic-map-server
+```
+```bash
+sudo apt-get install ros-noetic-amcl
+```
+```bash
+sudo apt-get install ros-noetic-move-base
+```
+```bash
+sudo apt-get install ros-noetic-slam-gmapping
 ```
 
 ## Build and Launch
