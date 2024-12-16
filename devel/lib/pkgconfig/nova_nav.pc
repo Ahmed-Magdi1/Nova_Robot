@@ -1,0 +1,8 @@
+prefix=/home/ahmed/Desktop/nova_ws/devel
+
+Name: nova_nav
+Description: Description of nova_nav
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

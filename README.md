@@ -125,3 +125,58 @@ roslaunch nova_nav navigation.launch
 
 Set a `2D Nav Goal` in RViz to command the robot to a target position.
 
+# Robot In Action
+
+<table style="width:100%">
+  <tr>
+    <th><p>
+           <img src="src/nova_description/image/robot_gazebo.png"
+            alt="Gazebo" width="400" height="200"></a>
+           <br>Robot In Gazebo
+        </p>
+    </th>
+    <th><p>
+           <img src="src/nova_description/image/robot_rviz.png"
+            alt="Rviz" width="400" height="200"></a>
+           <br>Robot In Rviz
+      </p>
+    </th>
+  </tr>
+  <tr>
+    <th><p>
+           <img src="src/nova_description/image/AMCL.png"
+            alt="AMCL" width="400" height="200"></a>
+           <br>AMCL Particles
+      </p>
+    </th>
+    <th><p>
+           <img src="src/nova_description/image/local_costmap.png"
+            alt="costmap" width="400" height="200"></a>
+           <br>Global_and_Local costmap
+      </p>
+    </th>
+  </tr>
+</table>
+
+# Planners
+
+<table style="width:100%">
+  <tr>
+    <th><p>
+           <img src="src/nova_description/image/path.png"
+            alt="Gazebo" width="500" height="300"></a>
+           <br>Global_Planner
+        </p>
+    </th>
+    <th><p>
+           <img src="src/nova_description/image/DWA2.png"
+            alt="Rviz" width="500" height="300"></a>
+           <br>Local_Planner
+      </p>
+    </th>
+  </tr>
+</table>
+
+# Robot tf
+
+![Nova_robot](/src/nova_description/image/frames.png)

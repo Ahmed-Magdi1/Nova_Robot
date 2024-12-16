@@ -1,0 +1,8 @@
+prefix=/home/ahmed/Desktop/nova_ws/install
+
+Name: nova_slam
+Description: Description of nova_slam
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
