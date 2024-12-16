@@ -97,8 +97,8 @@ $ sudo apt-get install ros-noetic-slam-gmapping
 1. Clone the project into your workspace
 ```bash
 cd "your workspace"
-git clone https://github.com/Ahmed-Magdi1/Home-Service-Robot.git
-cd nova_ws
+git clone https://github.com/Ahmed-Magdi1/Nova_Robot.git
+cd Nova_Robot
 ```
 
 2. Build the project
