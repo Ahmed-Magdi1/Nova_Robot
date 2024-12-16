@@ -1,2 +1,0 @@
-nova_description:nova_gazebo:nova_nav:nova_slam
--DCATKIN_DEVEL_PREFIX=/home/ahmed/Desktop/nova_ws/devel -DCMAKE_INSTALL_PREFIX=/home/ahmed/Desktop/nova_ws/install -G Unix Makefiles

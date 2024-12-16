@@ -1,8 +1,0 @@
-prefix=/home/ahmed/Desktop/nova_ws/devel
-
-Name: nova_gazebo
-Description: Description of nova_gazebo
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

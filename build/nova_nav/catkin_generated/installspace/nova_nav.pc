@@ -1,8 +1,0 @@
-prefix=/home/ahmed/Desktop/nova_ws/install
-
-Name: nova_nav
-Description: Description of nova_nav
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
