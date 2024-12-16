@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<robot name="myrobot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <gazebo reference="base_link">
+        <material>Gazebo/Black</material>
+    </gazebo> 
+
+    <gazebo reference="Right_Wheel_Back">
+        <material>Gazebo/DarkGrey</material>
+    </gazebo>
+
+    <gazebo reference="Left_Wheel_Front">
+        <material>Gazebo/DarkGrey</material>
+    </gazebo> 
+
+    <gazebo reference="Right_Wheel_Front">
+        <material>Gazebo/DarkGrey</material>
+    </gazebo> 
+
+    <gazebo reference="Left_Wheel_Back">
+        <material>Gazebo/DarkGrey</material>
+    </gazebo> 
+
+    <gazebo reference="Raspberry_pi_4_case">
+        <material>Gazebo/DarkGrey</material>
+    </gazebo> 
+
+    <gazebo reference="Raspberry_pi_4">
+        <material>Gazebo/Green</material>
+    </gazebo> 
+
+</robot>

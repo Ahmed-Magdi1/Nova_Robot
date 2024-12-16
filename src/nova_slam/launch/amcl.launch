@@ -1,0 +1,47 @@
+<launch>
+
+  <!-- Rviz_config -->
+  <arg name="rviz_config_file" default="$(find my_robot)/rviz_config/Home_Service_Robot.rviz" />
+
+  <!-- Rviz_node -->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(arg rviz_config_file)" />
+
+  <!-- Map Server -->
+  <arg name="map_file" default="$(find my_robot)/map/final_map.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+  <arg name="robot_init_x" default="-8"/>
+  <arg name="robot_init_y" default="8"/>
+  <arg name="robot_init_phi" default="0"/>
+
+  <!-- AMCL Node -->
+  <node name="amcl" pkg="amcl" type="amcl" output="screen">
+    <param name="odom_frame_id" value="odom"/>
+    <param name="odom_model_type" value="diff-corrected"/>
+    <param name="base_frame_id" value="robot_footprint"/>
+    <param name="global_frame_id" value="map"/>
+    <param name="scan_topic" value="scan"/>
+    <param name="initial_pose_x" value="$(arg robot_init_x)"/>
+    <param name="initial_pose_y" value="$(arg robot_init_y)"/>
+    <param name="initial_pose_a" value="$(arg robot_init_phi)"/>
+
+  </node>
+
+  <!-- Move Base -->
+  <node name="move_base" pkg="move_base" type="move_base" respawn="false" output="screen">
+    <param name="base_global_planner" value="navfn/NavfnROS"/>
+    <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS"/>
+
+    <rosparam file="$(find my_robot)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find my_robot)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find my_robot)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find my_robot)/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find my_robot)/config/base_local_planner_params.yaml" command="load" />
+  </node>
+
+</launch>
+
+
+
+
+

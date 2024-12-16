@@ -1,0 +1,172 @@
+<?xml version="1.0" ?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="myrobot">
+
+  <xacro:include filename="$(find nova_description)/urdf/colors.xacro"/> 
+  <xacro:include filename="$(find nova_description)/urdf/nova.gazebo"/> 
+  <xacro:include filename="$(find nova_description)/urdf/color_gazebo"/> 
+    <!-- Robot footprint link -->
+  <link name="robot_footprint"/>
+  <joint name="robot_footprint_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="robot_footprint" />
+    <child link="base_link" />    
+  </joint>
+
+    <!-- Robot base_link -->
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+      <mass value="20.0"/>
+      <inertia ixx="0.1667" ixy="0.0" ixz="0.0" iyy="0.4333" iyz="0.0" izz="0.5667"/>
+    </inertial>
+    <visual name="base_link">
+      <origin xyz="-0.277 -0.2 0.03" rpy="1.57 0.0 1.57"/>
+      <geometry>
+        <mesh filename="package://nova_description/meshes/Robot_base.STL" scale="0.003 0.003 0.003"/>
+      </geometry>
+      <material name="Black">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.277 -0.2 0.03" rpy="1.57 0.0 1.57"/>
+      <geometry>
+        <mesh filename="package://nova_description/meshes/Robot_base.STL" scale="0.003 0.003 0.003"/>
+      </geometry>
+    </collision>
+  </link>
+
+
+    <!-- xacro setup (Wheel) -->
+  <xacro:macro name="wheel" params="name x y z r p n mesh">
+
+      <link name="${name}">
+          <inertial>
+              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+              <mass value="15.0"/>
+              <inertia ixx="0.040625" ixy="0.0" ixz="0.0" iyy="0.040625" iyz="0.0" izz="0.075"/>
+          </inertial>
+          <visual name="${name}">      
+              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+              <geometry>
+                 <mesh filename="${mesh}" scale="0.003 0.003 0.003"/>
+              </geometry>
+              <material name="DarkGrey"/>
+          </visual>                   
+          <collision>
+              <geometry>
+                  <cylinder radius="0.1" length="0.1"/>
+              </geometry>
+          </collision>
+      </link>
+
+      <joint name="Joint_${name}" type="continuous">
+          <origin xyz="${x} ${y} ${z}" rpy="${r} ${p} ${n}"/>
+          <parent link="base_link"/>
+          <child link="${name}"/>
+          <axis xyz="0.0 0.0 1.0"/>
+      </joint>
+  </xacro:macro>
+
+    <!--wheel xacro-->
+  <xacro:wheel name="Left_Wheel_Front" x="0.2" y="0.267" z="0.08" r="1.5708" p="3.14" n="3.14" mesh="package://nova_description/meshes/MecanumLeft.stl"/>
+  <xacro:wheel name="Right_Wheel_Back" x="-0.1" y="-0.248" z="0.08" r="1.5708" p="3.14" n="3.14" mesh="package://nova_description/meshes/MecanumRight.stl"/>
+  <xacro:wheel name="Left_Wheel_Back" x="-0.1" y="0.267" z="0.08" r="1.5708" p="3.14" n="3.14" mesh="package://nova_description/meshes/MecanumLeft.stl"/>
+  <xacro:wheel name="Right_Wheel_Front" x="0.2" y="-0.248" z="0.08" r="1.5708" p="3.14" n="3.14" mesh="package://nova_description/meshes/MecanumRight.stl"/>
+  
+    <!-- RPlidar -->
+  <link name="rplidar_link">
+      <inertial>
+        <mass value="0.19"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+      </inertial>
+      <visual>
+          <origin xyz="0.0 0.0 0.065" rpy="0.0 0.0 0.0"/>
+          <geometry>
+            <mesh filename="package://nova_description/meshes/rplidar.dae" scale="2.5 2.5 2.5"/>
+          </geometry>
+          <material name="Black"/>
+      </visual>
+      <collision>
+          <origin xyz="0.0 0.0 0.065" rpy="0.0 0.0 0.0"/>
+          <geometry>
+            <mesh filename="package://nova_description/meshes/rplidar.dae" scale="2.5 2.5 2.5"/>
+          </geometry>
+      </collision>
+  </link>
+
+  <joint name="rplidar_joint" type="fixed">
+    <origin xyz="0.05 0.0 0.29" rpy="0.0 0.0 0.0"/>
+    <parent link="base_link"/>
+    <child link="rplidar_link"/>
+    <axis xyz="0.0 1.0 0.0"/>
+  </joint>
+  
+  <!-- MPU6050 -->
+  <link name="imu_link"/>
+
+  <joint name="imu_joint" type="fixed">
+    <origin xyz="0.05 0 0.25" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+  </joint>
+
+  <link name="Raspberry_pi_4_case">
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+      </inertial>
+      <visual>
+          <origin xyz="0.0 0.0 0.0" rpy="3.14 3.14 1.57"/>
+          <geometry>
+            <mesh filename="package://nova_description/meshes/Raspberry_pi_4_case.stl" scale="0.003 0.003 0.003"/>
+          </geometry>
+          <material name="DarkGrey"/>
+      </visual>
+      <collision>
+          <origin xyz="0.0 0.0 0.0" rpy="3.14 3.14 1.57"/>
+          <geometry>
+            <mesh filename="package://nova_description/meshes/Raspberry_pi_4_case.stl" scale="0.003 0.003 0.003"/>
+          </geometry>
+      </collision>
+  </link>
+
+  <joint name="Raspberry_pi_4_case_joint" type="fixed">
+    <origin xyz="-0.22 0.135 0.26" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="Raspberry_pi_4_case"/>
+  </joint>
+
+  <link name="Raspberry_pi_4">
+      <inertial>
+        <mass value="0.2"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+      </inertial>
+      <visual>
+          <origin xyz="0.0 0.0 0.0" rpy="3.14 3.14 -1.57"/>
+          <geometry>
+            <mesh filename="package://nova_description/meshes/Raspberry_pi_4.stl" scale="0.003 0.003 0.003"/>
+          </geometry>
+          <material name="Green"/>
+      </visual>
+      <collision>
+          <origin xyz="0.0 0.0 0.0" rpy="3.14 3.14 -1.57"/>
+          <geometry>
+            <mesh filename="package://nova_description/meshes/Raspberry_pi_4.stl" scale="0.003 0.003 0.003"/>
+          </geometry>
+      </collision>
+  </link>
+
+  <joint name="Raspberry_pi_4_joint" type="fixed">
+    <origin xyz="0.1455 -0.366 0.252" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="Raspberry_pi_4"/>
+  </joint>
+  
+
+</robot>
+
